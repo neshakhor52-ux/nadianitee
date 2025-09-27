@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffdee9 0%, #ff9ac4 100%);
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: absolute;
+    top:0;left:0;right:0;bottom:0;
+    background: radial-gradient(circle at center, rgba(255,182,193,0.2) 0%, rgba(255,105,180,0.2) 100%);
+    z-index:0;
+  }
+  .sticker {
+    position: absolute;
+    max-width: 80px;
+    opacity: 0.9;
+    z-index:1;
+  }
+  .sticker1 { top: 10%; left: 5%; transform: rotate(-10deg); }
+  .sticker2 { top: 20%; right: 10%; transform: rotate(15deg); }
+  .sticker3 { bottom: 15%; left: 10%; transform: rotate(-15deg); }
+  .sticker4 { bottom: 10%; right: 5%; transform: rotate(10deg); }
+  .message-box {
+    position: relative;
+    z-index:2;
+    background: #fff;
+    color: #000;
+    padding: 20px;
+    max-width: 90%;
+    width: 500px;
+    margin: 20vh auto 0;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+  .message-box p {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: #000;
+  }
+  .slideshow-container {
+    position: relative;
+    z-index:2;
+    width: 80%;
+    max-width: 600px;
+    margin: 40px auto 0;
+    height: auto;
+    display: none;
+  }
+  .slideshow-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .slideshow-container img.active {
+    opacity: 1;
+  }
+  @media (max-width: 600px) {
+    .message-box p { font-size: 1.2rem; }
+    .sticker { max-width: 60px; }
+    .slideshow-container { width: 90%; }
+  }
+</style>
+</head>
+<body>
+<img src="sticker1.png" class="sticker sticker1" alt="">
+<img src="sticker2.png" class="sticker sticker2" alt="">
+<img src="sticker3.png" class="sticker sticker3" alt="">
+<img src="sticker4.png" class="sticker sticker4" alt="">
+<div class="message-box">
+  <p id="message"></p>
+</div>
+<div class="slideshow-container" id="slideshow">
+  <img src="pic1.jpg" alt="">
+  <img src="pic2.jpg" alt="">
+  <img src="pic3.jpg" alt="">
+</div>
+<script>
+const lines = [
+  "শুভ জন্মদিন আমার প্রিয় ❤️",
+  "তুমি আমার জীবনের সবচেয়ে সুন্দর অংশ",
+  "আজকের দিনটা তোমার জন্য স্পেশাল হোক 🎉"
+];
+let currentLine = 0;
+const messageEl = document.getElementById('message');
+const messageBox = document.querySelector('.message-box');
+const slideshowEl = document.getElementById('slideshow');
+function showLine() {
+  if (currentLine < lines.length) {
+    messageEl.textContent = lines[currentLine];
+    currentLine++;
+    setTimeout(showLine, 2000);
+  } else {
+    messageBox.style.display = 'none';
+    startSlideshow();
+  }
+}
+showLine();
+const images = document.querySelectorAll('.slideshow-container img');
+let currentImage = 0;
+function startSlideshow() {
+  slideshowEl.style.display = 'block';
+  showImage();
+}
+function showImage() {
+  images.forEach(img => img.classList.remove('active'));
+  images[currentImage].classList.add('active');
+  currentImage = (currentImage + 1) % images.length;
+  setTimeout(showImage, 1500);
+}
+</script>
+</body>
+</html>
