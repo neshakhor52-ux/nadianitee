@@ -63,7 +63,7 @@
     font-weight: 500;
     margin: 0;
     opacity: 0;
-    white-space: pre-line; /* preserve line breaks */
+    white-space: pre-line;
     transition: opacity 0.5s;
   }
 
@@ -136,13 +136,15 @@ function showLine() {
       messageEl.textContent = lines[currentLine];
       messageEl.style.opacity = 1;
       currentLine++;
-      setTimeout(showLine, 2000);
+      // Wait 10 seconds for reading
+      setTimeout(showLine, 10000);
     }, 200);
   } else {
+    // Keep message visible for 10 seconds before starting slideshow
     setTimeout(() => {
       messageBox.style.display = 'none';
       startSlideshow();
-    }, 1000);
+    }, 10000);
   }
 }
 showLine();
