@@ -39,6 +39,11 @@
   .content {
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Center vertically */
     text-align: center;
   }
 
@@ -48,7 +53,6 @@
     padding: 20px;
     max-width: 90%;
     width: 500px;
-    margin: 10vh auto 0;
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.2);
     transition: opacity 0.5s;
@@ -89,7 +93,7 @@
   @media (max-width: 600px) {
     .message-box p { font-size: 1.2rem; }
     .slideshow-container { width: 90%; }
-    .message-box { margin: 5vh auto 0; }
+    .message-box { width: 90%; padding: 15px; }
   }
 </style>
 </head>
@@ -109,7 +113,7 @@
 
 <script>
 const lines = [
-  "শুভ jmmytryrty ❤️",
+  "শুভ জন্মদিন আমার প্রিয় ❤️",
   "তুমি আমার জীবনের সবচেয়ে সুন্দর অংশ",
   "আজকের দিনটা তোমার জন্য স্পেশাল হোক 🎉"
 ];
@@ -153,8 +157,8 @@ function showImage() {
 }
 
 // Generate stickers randomly across the background
-const stickerImages = ['sticker1.png','sticker2.png','sticker3.png'];
-const numStickers = 20; // total stickers
+const stickerImages = ['sticker1.png','sticker2.png','sticker3.png','sticker4.png'];
+const numStickers = 20;
 
 for(let i=0;i<numStickers;i++){
   const sticker = document.createElement('img');
