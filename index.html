@@ -5,14 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday</title>
 <style>
+  /* Body & background */
   body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ffdee9 0%, #ff9ac4 100%);
-    overflow: hidden;
+    overflow-x: hidden;
     text-align: center;
     position: relative;
   }
+
   body::before {
     content: "";
     position: absolute;
@@ -20,6 +22,8 @@
     background: radial-gradient(circle at center, rgba(255,182,193,0.2) 0%, rgba(255,105,180,0.2) 100%);
     z-index:0;
   }
+
+  /* Stickers */
   .sticker {
     position: absolute;
     max-width: 80px;
@@ -30,33 +34,45 @@
   .sticker2 { top: 20%; right: 10%; transform: rotate(15deg); }
   .sticker3 { bottom: 15%; left: 10%; transform: rotate(-15deg); }
   .sticker4 { bottom: 10%; right: 5%; transform: rotate(10deg); }
-  .message-box {
+
+  /* Content wrapper */
+  .content {
     position: relative;
-    z-index:2;
+    z-index: 2; /* Above stickers */
+  }
+
+  /* Message box */
+  .message-box {
     background: #fff;
     color: #000;
     padding: 20px;
     max-width: 90%;
     width: 500px;
-    margin: 20vh auto 0;
+    margin: 10vh auto 0;
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    transition: opacity 0.5s;
   }
+
   .message-box p {
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
     color: #000;
+    opacity: 0;
+    transition: opacity 0.5s;
   }
+
+  /* Slideshow */
   .slideshow-container {
-    position: relative;
-    z-index:2;
     width: 80%;
     max-width: 600px;
     margin: 40px auto 0;
     height: auto;
-    display: none;
+    display: none; /* Hidden initially */
+    position: relative;
   }
+
   .slideshow-container img {
     width: 100%;
     height: auto;
@@ -67,55 +83,80 @@
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
   }
+
   .slideshow-container img.active {
     opacity: 1;
   }
+
+  /* Responsive */
   @media (max-width: 600px) {
     .message-box p { font-size: 1.2rem; }
     .sticker { max-width: 60px; }
     .slideshow-container { width: 90%; }
+    .message-box { margin: 5vh auto 0; }
   }
 </style>
 </head>
 <body>
+
+<!-- Stickers -->
 <img src="sticker1.png" class="sticker sticker1" alt="">
 <img src="sticker2.png" class="sticker sticker2" alt="">
 <img src="sticker3.png" class="sticker sticker3" alt="">
-<div class="message-box">
-  <p id="message"></p>
+<img src="sticker4.png" class="sticker sticker4" alt="">
+
+<div class="content">
+  <!-- Message box -->
+  <div class="message-box">
+    <p id="message"></p>
+  </div>
+
+  <!-- Slideshow -->
+  <div class="slideshow-container" id="slideshow">
+    <img src="pic1.jpg" alt="">
+    <img src="pic2.jpg" alt="">
+    <img src="pic3.jpg" alt="">
+  </div>
 </div>
-<div class="slideshow-container" id="slideshow">
-  <img src="pic1.jpg" alt="">
-  <img src="pic2.jpg" alt="">
-  <img src="pic3.jpg" alt="">
-</div>
+
 <script>
 const lines = [
   "শুভ জন্মদিন আমার প্রিয় ❤️",
   "তুমি আমার জীবনের সবচেয়ে সুন্দর অংশ",
   "আজকের দিনটা তোমার জন্য স্পেশাল হোক 🎉"
 ];
+
 let currentLine = 0;
 const messageEl = document.getElementById('message');
 const messageBox = document.querySelector('.message-box');
 const slideshowEl = document.getElementById('slideshow');
+
 function showLine() {
   if (currentLine < lines.length) {
-    messageEl.textContent = lines[currentLine];
-    currentLine++;
-    setTimeout(showLine, 2000);
+    messageEl.style.opacity = 0;
+    setTimeout(() => {
+      messageEl.textContent = lines[currentLine];
+      messageEl.style.opacity = 1;
+      currentLine++;
+      setTimeout(showLine, 2000);
+    }, 200);
   } else {
-    messageBox.style.display = 'none';
-    startSlideshow();
+    setTimeout(() => {
+      messageBox.style.display = 'none';
+      startSlideshow();
+    }, 1000);
   }
 }
 showLine();
+
 const images = document.querySelectorAll('.slideshow-container img');
 let currentImage = 0;
+
 function startSlideshow() {
   slideshowEl.style.display = 'block';
   showImage();
 }
+
 function showImage() {
   images.forEach(img => img.classList.remove('active'));
   images[currentImage].classList.add('active');
@@ -123,5 +164,6 @@ function showImage() {
   setTimeout(showImage, 1500);
 }
 </script>
+
 </body>
 </html>
