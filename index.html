@@ -137,14 +137,14 @@ function showLine() {
       messageEl.style.opacity = 1;
       currentLine++;
       // Wait 5 seconds for reading
-      setTimeout(showLine, 10000);
+      setTimeout(showLine, 5000);
     }, 200);
   } else {
     // Keep message visible for 5 seconds before starting slideshow
     setTimeout(() => {
       messageBox.style.display = 'none';
       startSlideshow();
-    }, 10000);
+    }, 5000);
   }
 }
 showLine();
