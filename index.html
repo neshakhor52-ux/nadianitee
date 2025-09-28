@@ -110,6 +110,7 @@
     <img src="pic2.jpg" alt="">
     <img src="pic3.jpg" alt="">
     <img src="pic4.jpg" alt="">
+    <img src="pic5.jpg" alt="">
   </div>
 </div>
 
@@ -135,11 +136,11 @@ function showLine() {
       messageEl.textContent = lines[currentLine];
       messageEl.style.opacity = 1;
       currentLine++;
-      // Wait 10 seconds for reading
+      // Wait 5 seconds for reading
       setTimeout(showLine, 10000);
     }, 200);
   } else {
-    // Keep message visible for 10 seconds before starting slideshow
+    // Keep message visible for 5 seconds before starting slideshow
     setTimeout(() => {
       messageBox.style.display = 'none';
       startSlideshow();
